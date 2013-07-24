@@ -18,7 +18,7 @@
 <body>
 
   <nav class="top-bar">
-    <%= render 'nav' %>
+    <%= render 'layouts/nav' %>
   </nav>
 
   <div id="signup_window" class="reveal-modal"></div>
@@ -26,7 +26,7 @@
 
   <% if !notice.blank? || !alert.blank? %>
     <div class="row">
-      <div class="large-12 columns">
+      <div class="large-12 large-centered columns">
         <% if !notice.blank? %>
           <div class="alert-box success" id="notice"><%= notice %></div>
         <% end %>
