@@ -1,0 +1,26 @@
+.row
+  .large-12.large-centered.columns
+
+  %table
+    %tr
+      %th Activity
+      %th Value
+      %th Units
+      %th Completed
+      %th User
+      %th
+      %th
+      %th
+
+    - @exercises.each do |exercise|
+      %tr
+        %td= exercise.activity
+        %td= exercise.value
+        %td= exercise.units
+        %td= exercise.completed
+        %td= exercise.user.email
+        %td= link_to 'Show', user_exercise_path(current_user.id, exercise.id)
+        %td= link_to 'Edit', edit_user_exercise_path(current_user.id, exercise.id)
+        %td= link_to 'Destroy', user_exercise_path(current_user.id, exercise.id), method: :delete, data: { confirm: 'Are you sure?' }
+
+  %br
