@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @users = User.all #needed since we no longer will be redirecting to a page that already has that defined
 
     respond_to do |format|
       if @user.save
@@ -50,7 +51,7 @@ class UsersController < ApplicationController
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
