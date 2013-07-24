@@ -2,7 +2,8 @@ class ExercisesController < ApplicationController
   # GET /exercises
   # GET /exercises.json
   def index
-    @exercises = Exercise.all
+    @user = User.find(session[:user_id])
+    @exercises = @user.exercises
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,18 +14,20 @@ class ExercisesController < ApplicationController
   # GET /exercises/1
   # GET /exercises/1.json
   def show
+    @user = User.find(session[:user_id])
     @exercise = Exercise.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json { render json: @exercise }
     end
   end
 
   # GET /exercises/new
   # GET /exercises/new.json
   def new
-    @user = User.new
+    @user = User.find(session[:user_id])
+    @exercise = Exercise.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,18 +37,18 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
+    @exercise = Exercise.find(params[:id])
   end
 
   # POST /exercises
   # POST /exercises.json
   def create
-    @user = User.new(params[:user])
+    @user = User.find(session[:user_id])
+    @exercise = Exercise.new(params[:exercise])
 
     respond_to do |format|
-      if @user.save
-        @exercises = User.all #needed since we no longer will be redirecting to a page that already has that defined
-
+      if @exercise.save
         format.html { redirect_to(:exercises, :notice => 'User was successfully created.') }
         format.js
       else
@@ -58,15 +61,16 @@ class ExercisesController < ApplicationController
   # PUT /exercises/1
   # PUT /exercises/1.json
   def update
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
+    @exercise = Exercise.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      if @exercise.update_attributes(params[:exercise])
+        format.html { redirect_to @exercise, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @exercise.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -74,8 +78,9 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1
   # DELETE /exercises/1.json
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    @user = User.find(session[:user_id])
+    @exercise = Exercise.find(params[:id])
+    @exercise.destroy
 
     respond_to do |format|
       format.html { redirect_to exercises_url }
