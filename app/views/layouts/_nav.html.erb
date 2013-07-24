@@ -11,7 +11,7 @@
       <li><%= link_to "Logged in: #{current_user.email}", edit_user_path(current_user.id) %></li>
       <li><%= link_to "Your Exercises", user_exercises_path(current_user.id) %></li>
       <li class="divider"></li>
-      <li><%= link_to "Logout", :logout, :remote => true %></li>
+      <li><%= link_to "Logout", :logout %></li>
     <% else %>
       <li><%= link_to "Register", new_user_path, :remote => true, :data => {"reveal-id" => "signup_window"} %></li>
       <li class="divider"></li>

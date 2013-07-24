@@ -25,7 +25,7 @@ class UserSessionsController < ApplicationController
   def destroy
     logout
     respond_to do |format|
-      format.html {redirect_to(:users, :notice => 'Logged out!')}
+      format.html {redirect_to(root_path, :notice => 'Logged out!')}
       format.js
     end
   end
