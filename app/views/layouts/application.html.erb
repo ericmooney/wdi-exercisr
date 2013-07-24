@@ -2,18 +2,23 @@
 <html>
 <head>
   <title>Exercisr</title>
+  <link rel="stylesheet" href="css/app.css" />
+  <script src="js/vendor/custom.modernizr.js"></script>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<!-- need to add title area -->
  <nav class="top-bar">
    <div class="row">
    <section class="top-bar-section">
      <ul class="left">
        <li class="divider"></li>
        <% if current_user %>
+         <li class="divider"></li>
+         <li><%= link_to "Logged in as #{current_user.email}", edit_user_path(current_user.id) %></li>
          <li class="divider"></li>
          <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
          <li class="divider"></li>
@@ -24,6 +29,7 @@
      </ul>
          <% else %>
            <li><%= link_to "Register", new_user_path %></li>
+           <li><%= link_to "Register (AJAX)", new_user_path, :remote => true %></li>
            <li class="divider"></li>
            <li><%= link_to "Login", :login %></li>
            <li class="divider"></li>
@@ -31,12 +37,28 @@
      </ul>
  </nav>
 
-<div>
-  <p id="notice"><%= notice %></p>
-  <p id="alert"><%= alert %></p>
+<% if !notice.nil? %>
+  <div data-alert class="alert-box success">
+    <p id="notice"><%= notice %></p>
+    <a href="#" class="close">&times;</a>
+  </div>
+<% end %>
+
+ <% if !alert.nil? %>
+   <div data-alert class="alert-box alert">
+     <p id="alert"><%= alert %></p>
+     <a href="#" class="close">&times;</a>
+   </div>
+<% end %>
+
+<div class="row">
+  <div class="large-centered columns">
+
+    <%= yield %>
+  </div>
 </div>
 
-<%= yield %>
+<%= javascript_include_tag "application" %>
 
 </body>
 </html>
