@@ -1,23 +1,26 @@
-%h1 Listing users
+.row
+  .large-12.columns
 
-%table
-  %tr
-    %th Email
-    %th Crypted password
-    %th Salt
-    %th
-    %th
-    %th
+  %h1 Listing users
 
-  - @users.each do |user|
+  %table
     %tr
-      %td= user.email
-      %td= user.crypted_password
-      %td= user.salt
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+      %th Email
+      %th Crypted password
+      %th Salt
+      %th
+      %th
+      %th
 
-%br
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= user.crypted_password
+        %td= user.salt
+        %td= link_to 'Show', user
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
 
-= link_to 'New User', new_user_path
+  %br
+
+  = link_to 'New User', new_user_path

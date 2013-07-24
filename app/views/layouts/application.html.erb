@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Exercisr</title>
-  <link rel="stylesheet" href="css/app.css" />
-  <script src="js/vendor/custom.modernizr.js"></script>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
+    <meta charset="utf-8" />
+
+    <!-- Uncomment to make IE8 render like IE7 -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Exercisr" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
 <body>
 
-<!-- need to add title area -->
- <nav class="top-bar">
-   <div class="row">
-   <section class="top-bar-section">
-     <ul class="left">
-       <li class="divider"></li>
-       <% if current_user %>
-         <li class="divider"></li>
-         <li><%= link_to "Logged in as #{current_user.email}", edit_user_path(current_user.id) %></li>
-         <li class="divider"></li>
-         <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
-         <li class="divider"></li>
-     </ul>
-     <ul class="right">
-       <li><%= link_to "Log Out", :logout %></li>
-       <li class="divider"></li>
-     </ul>
-         <% else %>
-           <li><%= link_to "Register", new_user_path %></li>
-           <li><%= link_to "Register (AJAX)", new_user_path, :remote => true %></li>
-           <li class="divider"></li>
-           <li><%= link_to "Login", :login %></li>
-           <li class="divider"></li>
-         <% end %>
-     </ul>
- </nav>
+  <nav class="top-bar">
+    <ul class="title-area">
+      <li class="name">
+        <h1><%= link_to "Exercisr", root_path %></a></h1>
+      </li>
+    </ul>
 
-<% if !notice.nil? %>
-  <div data-alert class="alert-box success">
-    <p id="notice"><%= notice %></p>
-    <a href="#" class="close">&times;</a>
-  </div>
-<% end %>
+    <section class="top-bar-section">
+      <ul class="right">
+        <li class="divider"></li>
+        <% if current_user %>
+          <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Logout", :logout %></li>
+        <% else %>
+          <li><%= link_to "Register", new_user_path %></li>
+          <li><%= link_to "Register (AJAX)", new_user_path, :remote => true, :data => {"reveal-id" => "signup_window"} %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Login", :login %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 
- <% if !alert.nil? %>
-   <div data-alert class="alert-box alert">
-     <p id="alert"><%= alert %></p>
-     <a href="#" class="close">&times;</a>
-   </div>
-<% end %>
+  <div id="signup_window" class="reveal-modal"></div>
 
-<div class="row">
-  <div class="large-centered columns">
+  <% if !notice.blank? || !alert.blank? %>
+    <div class="row">
+      <div class="large-12 columns">
+        <% if !notice.blank? %>
+          <div class="alert-box success" id="notice"><%= notice %></div>
+        <% end %>
 
-    <%= yield %>
-  </div>
-</div>
+        <% if !alert.blank? %>
+          <div class="alert-box alert" id="alert"><%= alert %></div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
-<%= javascript_include_tag "application" %>
+  <%= yield %>
 
+  <%= javascript_include_tag "application" %>
 </body>
 </html>
