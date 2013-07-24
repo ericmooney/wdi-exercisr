@@ -8,13 +8,28 @@
 </head>
 <body>
 
-<% if current_user %>
-  <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
-  <%= link_to "Logout", :logout %>
-<% else %>
-  <%= link_to "Register", new_user_path %> |
-  <%= link_to "Login", :login %>
-<% end %>
+ <nav class="top-bar">
+   <div class="row">
+   <section class="top-bar-section">
+     <ul class="left">
+       <li class="divider"></li>
+       <% if current_user %>
+         <li class="divider"></li>
+         <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
+         <li class="divider"></li>
+     </ul>
+     <ul class="right">
+       <li><%= link_to "Log Out", :logout %></li>
+       <li class="divider"></li>
+     </ul>
+         <% else %>
+           <li><%= link_to "Register", new_user_path %></li>
+           <li class="divider"></li>
+           <li><%= link_to "Login", :login %></li>
+           <li class="divider"></li>
+         <% end %>
+     </ul>
+ </nav>
 
 <div>
   <p id="notice"><%= notice %></p>

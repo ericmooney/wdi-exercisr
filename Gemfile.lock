@@ -126,6 +126,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    zurb-foundation (2.2.1.2)
+      jquery-rails (>= 1.0)
+      railties (>= 3.1.0, < 4.0)
 
 PLATFORMS
   ruby
@@ -141,3 +144,4 @@ DEPENDENCIES
   sorcery
   uglifier (>= 1.0.3)
   unicorn
+  zurb-foundation (~> 2.2)
