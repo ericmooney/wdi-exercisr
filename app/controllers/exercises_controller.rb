@@ -5,6 +5,14 @@ class ExercisesController < ApplicationController
     @user = User.find(session[:user_id])
     @exercises = @user.exercises
 
+    @exercises_no_repeat = []
+
+    @exercises.each do |exercise|
+      if !@exercises_no_repeat.include?(exercise.activity)
+        @exercises_no_repeat << exercise.activity
+      end
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.js
