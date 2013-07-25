@@ -1,0 +1,6 @@
+var exercises_table = $('#exercises_table');
+
+$('#new_exercise > div').remove();
+$('#new_exercise a').show();
+
+exercises_table.empty().append("<%= j render 'exercises' %>");

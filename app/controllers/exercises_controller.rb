@@ -57,6 +57,7 @@ class ExercisesController < ApplicationController
 
     respond_to do |format|
       if @exercise.save
+        @exercises = @user.exercises
         format.html { redirect_to(:exercises, :notice => 'User was successfully created.') }
         format.js
       else

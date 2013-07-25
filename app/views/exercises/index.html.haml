@@ -3,11 +3,16 @@
 
   %h1 Listing exercises
 
+  %h2 Add a new exercise
+  #new_exercise{:class => "large-3"}
+    = link_to "Add Exercise", new_user_exercise_path, :id => "new_exercise", :class => "button", :remote => true
+
   %h2 All of your performed activities
 
   %select{:name => 'Activities', :class => "small-3"}
+    %option{:value=>"", :name=>"activity"}--
     - @exercises_no_repeat.each do |exercise|
       %option{:value=>exercise, :name=>"activity"}= exercise
 
-  #users_table
+  #exercises_table
     = render 'exercises'
