@@ -13,3 +13,11 @@
  *= require_tree .
  */
 
+ .graph {
+   width:auto;
+   height:100px;
+   margin-left:100px;
+   margin-right:100px;
+   border: 1px solid black;
+   box-sizing:border-box;
+ }
