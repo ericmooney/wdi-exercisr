@@ -9,10 +9,11 @@
 
   %h2 All of your performed activities
 
-  %select{:name => 'Activities', :class => "small-3"}
+  %select{:name => 'Activities', :id => "activity_select", :class => "small-3"}
     %option{:value=>"", :name=>"activity"}--
     - @exercises_no_repeat.each do |exercise|
       %option{:value=>exercise, :name=>"activity"}= exercise
+  #chart_button{:class => "button"} Chart
 
   #exercises_table
     = render 'exercises'

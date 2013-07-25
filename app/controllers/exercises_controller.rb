@@ -31,6 +31,11 @@ class ExercisesController < ApplicationController
     end
   end
 
+  def chart
+    activity = params[:activity]
+    render :json => current_user.exercises.where(:activity => activity)
+  end
+
   # GET /exercises/new
   # GET /exercises/new.json
   def new
